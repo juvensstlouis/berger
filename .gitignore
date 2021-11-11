@@ -1,3 +1,6 @@
+# All
+.vscode/
+
 # Frontend
 node_modules/
 
