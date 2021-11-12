@@ -24,13 +24,13 @@ namespace Berger.Application.Services
                 FoundationDate = churchRequestModel.FoundationDate,
                 Address = new Address
                 {
-                    ZipCode = churchRequestModel.Address?.ZipCode,
-                    Street = churchRequestModel.Address?.Street,
-                    Number = churchRequestModel.Address?.Number,
-                    Complement = churchRequestModel.Address?.Complement,
-                    Neighborhood = churchRequestModel.Address?.Neighborhood,
-                    City = churchRequestModel.Address?.City,
-                    State = churchRequestModel.Address?.State,
+                    ZipCode = churchRequestModel.ZipCode,
+                    Street = churchRequestModel.Street,
+                    Number = churchRequestModel.Number,
+                    Complement = churchRequestModel.Complement,
+                    Neighborhood = churchRequestModel.Neighborhood,
+                    City = churchRequestModel.City,
+                    State = churchRequestModel.State,
                 }
             };
 
