@@ -30,6 +30,18 @@ namespace Berger.Web
 
             services.AddDbContext<MainContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAll", builder =>
+        {
+            builder
+            .AllowAnyMethod()
+            .AllowAnyOrigin()
+            .AllowAnyHeader();
+        });
+    });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,12 +54,14 @@ namespace Berger.Web
             using (var service = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = service.ServiceProvider.GetRequiredService<MainContext>();
-                
+
                 if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
                 {
                     context.Database.Migrate();
                 }
             }
+
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
 

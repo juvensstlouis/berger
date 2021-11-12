@@ -18,7 +18,6 @@ namespace Berger.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create-church")]
         public async Task<IActionResult> CreateChurch(ChurchRequestModel churchRequestModel)
         {
             try
