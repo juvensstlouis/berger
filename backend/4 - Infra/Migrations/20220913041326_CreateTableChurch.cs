@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Berger.Infra.Migrations
 {
-    public partial class CreateTableChurches : Migration
+    public partial class CreateTableChurch : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Churches",
+                name: "Church",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -25,14 +25,14 @@ namespace Berger.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Churches", x => x.Id);
+                    table.PrimaryKey("PK_Church", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Churches");
+                name: "Church");
         }
     }
 }

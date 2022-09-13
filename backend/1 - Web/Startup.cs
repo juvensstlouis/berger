@@ -29,7 +29,7 @@ namespace Berger.Web
             services.AddScoped<IChurchRepository, ChurchRepository>();
 
             services.AddDbContext<MainContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddCors(options =>
     {

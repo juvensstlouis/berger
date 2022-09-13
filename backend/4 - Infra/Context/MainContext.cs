@@ -26,7 +26,7 @@ namespace Berger.Infra.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .UseSqlServer("SqlServerConnection");
+                    .UseNpgsql("Server=localhost;Port=5432;Database=Berger;User Id=postgres;Password=postgres;");
             }
         }
     }

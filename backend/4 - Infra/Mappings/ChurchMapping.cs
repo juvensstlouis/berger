@@ -8,7 +8,7 @@ namespace Berger.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Church> builder)
         {
-            builder.ToTable("Churches");
+            builder.ToTable("Church");
             builder.HasKey(c => c.Id);
             builder.OwnsOne(c => c.Address);
         }
