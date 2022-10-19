@@ -4,5 +4,3 @@ interface ChurchRequestModel {
   zipCode: string;
   number: string;
 }
-
-export default ChurchRequestModel;

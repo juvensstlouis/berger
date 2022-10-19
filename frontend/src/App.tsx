@@ -1,6 +1,5 @@
 import "antd/dist/antd.css";
 import { Form, Input, Button, notification } from "antd";
-import ChurchRequestModel from "./models/ChurchRequestModel";
 import axios from "axios";
 import "./index.css";
 import "./App.css";
