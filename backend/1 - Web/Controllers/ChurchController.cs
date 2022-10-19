@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Berger.Application.Interfaces;
-using Berger.Application.Models;
+using Berger.Application.Models.Church;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Berger.Web.Controllers
@@ -10,7 +10,7 @@ namespace Berger.Web.Controllers
     [ApiController]
     public class ChurchController : ControllerBase
     {
-        private IChurchService _churchService;
+        private readonly IChurchService _churchService;
 
         public ChurchController(IChurchService churchService)
         {
@@ -23,7 +23,21 @@ namespace Berger.Web.Controllers
             try
             {
                 await _churchService.CreateChurch(churchRequestModel);
-                return Ok("Igreja criada com sucesso");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllChurchs()
+        {
+            try
+            {
+                var churchs = await _churchService.GetAllChurchs();
+                return Ok(churchs);
             }
             catch (Exception ex)
             {

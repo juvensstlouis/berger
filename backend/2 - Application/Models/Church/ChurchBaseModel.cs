@@ -1,11 +1,8 @@
-using System;
-
-namespace Berger.Application.Models
+namespace Berger.Application.Models.Church
 {
-    public class ChurchRequestModel
+    public abstract class ChurchBaseModel
     {
         public string Name { get; set; }
-        public DateTime FoundationDate { get; set; }
         public string ZipCode { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
