@@ -1,9 +1,7 @@
-# All
+.vs/
 .vscode/
 
-# Frontend
 node_modules/
 
-# Backend
 bin/
 obj/
