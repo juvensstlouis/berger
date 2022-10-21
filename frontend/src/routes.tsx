@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import CreateChurch from "./pages/CreateChurch";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -13,7 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest } : any) => (
     isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        <Redirect to={{ pathname: "/sign-in", state: { from: props.location } }} />
       )
     }
   />
@@ -22,8 +23,9 @@ const PrivateRoute = ({ component: Component, ...rest } : any) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={SignIn} />
-      <Route path="/sign-up" component={SignUp} />
+      {isAuthenticated() ? <Redirect to={{ pathname: "/" }} /> :  <Route path="/sign-up" component={SignUp} /> }
+      {isAuthenticated() ? <Redirect to={{ pathname: "/" }} /> :  <Route path="/sign-in" component={SignIn} /> }
+      <PrivateRoute path="/" component={Home} />
       <PrivateRoute path="/create-church" component={CreateChurch} />
       <Route path="*" component={NotFound} />
     </Switch>

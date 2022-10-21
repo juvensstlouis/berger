@@ -28,6 +28,7 @@ export const Form = styled.form`
     padding: 10px;
     width: 100%;
     text-align: center;
+    font-size: 18px;
   }
   input {
     flex: 1;
@@ -35,7 +36,7 @@ export const Form = styled.form`
     margin-bottom: 15px;
     padding: 0 20px;
     color: #777;
-    font-size: 15px;
+    font-size: 18px;
     width: 100%;
     border: 1px solid #ddd;
     &::placeholder {
@@ -44,12 +45,13 @@ export const Form = styled.form`
   }
   button {
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     background: cadetblue;
     height: 56px;
     border: 0;
     border-radius: 5px;
     width: 100%;
+    cursor: pointer;
   }
   hr {
     margin: 20px 0;
@@ -58,7 +60,7 @@ export const Form = styled.form`
     width: 100%;
   }
   a {
-    font-size: 16;
+    font-size: 24px;
     font-weight: bold;
     color: #999;
     text-decoration: none;

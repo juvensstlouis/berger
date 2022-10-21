@@ -22,10 +22,13 @@ namespace Berger.Application.Services
         {
             request.Username = request.Username.Trim();
 
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            var user = await _userRepository.Get(request.Username, passwordHash);
+            //int workfactor = 10;
+            //string salt = BCrypt.Net.BCrypt.GenerateSalt(workfactor);
+            //string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);//, salt);
 
-            if (user == null)
+            var user = await _userRepository.GetByUsername(request.Username);
+
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
             {
                 throw new NotFoundException("Usuário ou senha inválidos");
             }
@@ -34,7 +37,7 @@ namespace Berger.Application.Services
 
             return new UserResponseModel
             {
-                Id = user.Id.ToString(),
+                Id = user.Id,
                 Username = user.Username,
                 Email = user.Email,
                 Token = token
@@ -52,7 +55,9 @@ namespace Berger.Application.Services
                 throw new BadRequestException("Nome de usuário já existente.");
             }
 
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            //int workfactor = 10;
+            //string salt = BCrypt.Net.BCrypt.GenerateSalt(workfactor);
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);//, salt);
 
             user = new User
             {

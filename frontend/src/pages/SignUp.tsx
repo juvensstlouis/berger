@@ -1,7 +1,6 @@
 import { notification } from "antd";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import api from "../services/api";
 import { Form, Container } from "./styles/SignUpStyles";
 
@@ -20,10 +19,10 @@ export default function SignUp() {
     } else {
       api.post("/user", { username, email, password })
       .then((response: AxiosResponse) => {
-        if(response.status == 200) {
+        if(response.status === 200) {
           window.location.href = "/";
         }
-        else if(response.status == 400) {
+        else if(response.status === 400) {
           setError("Nome de usuário já existente.");
         }
         else {
@@ -59,8 +58,6 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Cadastrar</button>
-        <hr />
-        <Link to="/">Fazer login</Link>
       </Form>
     </Container>
   );

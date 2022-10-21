@@ -15,7 +15,7 @@ export default function CreateChurch() {
     console.log("Success:", values);
 
     axios
-      .post("https:localhost:5001/church", values)
+      .post("https://localhost:5001/church", values)
       .then(function (response) {
         if (response.status === 200) {
           notification.success({
@@ -44,7 +44,7 @@ export default function CreateChurch() {
   };
 
   return (
-    <div className="content">
+    <div className="create-church-container">
       <Form
         className="forms"
         onFinish={onSubmit}

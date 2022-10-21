@@ -82,7 +82,7 @@ namespace Berger.Web
 
                 if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
                 {
-                    //context.Database.Migrate();
+                    context.Database.Migrate();
                 }
             }
 

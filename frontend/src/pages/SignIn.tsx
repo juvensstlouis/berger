@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 import { isAuthenticated, login } from "../services/auth";
 import { Form, Container } from "./styles/SignInStyles";
@@ -19,10 +20,10 @@ export default function SignIn() {
       api
         .post("/user/login", { username, password })
         .then((response: AxiosResponse<UserResponseModel>) => {
-          if (response.status == 200) {
+          if (response.status === 200) {
             login(response.data.token);
             window.location.href = "/create-church";
-          } else if (response.status == 404) {
+          } else if (response.status === 404) {
             setError("Usuário ou senha inválidos");
           } else {
             throw new Error();
@@ -57,6 +58,8 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Entrar</button>
+          <hr />
+          <Link to="/sign-up">Cadastrar-se</Link>
         </Form>
       )}
     </Container>
