@@ -40,6 +40,11 @@ namespace Berger.Infra.Repositories
         {
             return await Query().ToListAsync();
         }
+
+        public async Task<bool> ExistsById(Guid id)
+        {
+            return await Query().AnyAsync(entity => entity.Id == id);
+        }
        
         public async Task Save() => await _dbContext.SaveChangesAsync();
 

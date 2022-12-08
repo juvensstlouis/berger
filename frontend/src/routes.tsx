@@ -1,35 +1,51 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import CreateChurch from "./pages/CreateChurch";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-
+import CreateChurchPage from "./pages/create-church";
+import CreatePersonPage from "./pages/create-person";
+import HomePage from "./pages/home";
+import SignInPage from "./pages/sign-in";
+import SignUpPage from "./pages/sign-up";
+import ViewPeoplePage from "./pages/view-people";
 import { isAuthenticated } from "./services/auth";
-
-const PrivateRoute = ({ component: Component, ...rest } : any) => (
-  <Route
-    {...rest}
-    render={props =>
-    isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/sign-in", state: { from: props.location } }} />
-      )
-    }
-  />
-);
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      {isAuthenticated() ? <Redirect to={{ pathname: "/" }} /> :  <Route path="/sign-up" component={SignUp} /> }
-      {isAuthenticated() ? <Redirect to={{ pathname: "/" }} /> :  <Route path="/sign-in" component={SignIn} /> }
-      <PrivateRoute path="/" component={Home} />
-      <PrivateRoute path="/create-church" component={CreateChurch} />
-      <Route path="*" component={NotFound} />
+      <Route path="/sign-in" component={SignInPage} />
+      <Route path="/sign-up" component={SignUpPage} />
+      <Route path="/create-church" component={CreateChurchPage} />
+      <Route path="/create-person" component={CreatePersonPage} />
+      <Route path="/view-people" component={ViewPeoplePage} />
+      <Route path="/" component={HomePage} />
     </Switch>
   </BrowserRouter>
 );
+
+export const AuthenticatedPage = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+}) => {
+  return isAuthenticated() ? (
+    <div className={"page " + className}>{children}</div>
+  ) : (
+    <Redirect to={{ pathname: "/sign-in" }} />
+  );
+};
+
+export const UnauthenticatedPage = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+}) => {
+  return !isAuthenticated() ? (
+    <div className={"page " + className}>{children}</div>
+  ) : (
+    <Redirect to={{ pathname: "/" }} />
+  );
+};
 
 export default Routes;

@@ -18,6 +18,7 @@ namespace Berger.Application.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim("id", user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Username.ToString()),
                     new Claim(ClaimTypes.Email, user.Email.ToString())
                 }),

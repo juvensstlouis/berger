@@ -1,0 +1,30 @@
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #02325e !important;
+}
+
+.ant-layout-header p {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.ant-layout-header .anticon-logout {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.ant-layout-header .ant-btn {
+  padding: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.ant-layout-header .ant-btn:hover {
+  background: none;
+  color: #999;
+}

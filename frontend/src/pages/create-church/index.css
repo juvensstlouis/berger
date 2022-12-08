@@ -1,0 +1,9 @@
+.create-church-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-form .ant-form-item .ant-input {
+  height: 38px !important;
+}

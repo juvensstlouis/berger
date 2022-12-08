@@ -29,11 +29,14 @@ namespace Berger.Web
         {
             services.AddControllers();
 
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             services.AddScoped<IChurchService, ChurchService>();
             services.AddScoped<IChurchRepository, ChurchRepository>();
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             services.AddDbContext<MainContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -93,6 +96,7 @@ namespace Berger.Web
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,6 +1,10 @@
-interface ChurchRequestModel {
+interface ChurchBaseModel {
   name: string;
-  foundationDate: Date;
-  zipCode: string;
-  number: string;
+}
+
+interface ChurchRequestModel extends ChurchBaseModel {
+}
+
+interface ChurchResponseModel extends ChurchBaseModel {
+  id: string;
 }

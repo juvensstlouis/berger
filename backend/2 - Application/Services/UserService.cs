@@ -28,9 +28,9 @@ namespace Berger.Application.Services
 
             var user = await _userRepository.GetByUsername(request.Username);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
+            if (user is null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
             {
-                throw new NotFoundException("Usuário ou senha inválidos");
+                throw new BadRequestException("Usuário e/ou senha inválidos. Por favor, verifique suas credenciais.");
             }
 
             var token = TokenService.GenerateToken(user);

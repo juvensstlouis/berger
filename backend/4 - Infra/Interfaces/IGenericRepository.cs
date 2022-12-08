@@ -11,6 +11,7 @@ namespace Berger.Infra.Interfaces
         void Update(T entity);
         Task<T> GetById(Guid id);
         Task<IEnumerable<T>> GetAll();
+        Task<bool> ExistsById(Guid id);
         Task Save();
     }
 }

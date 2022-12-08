@@ -2,13 +2,15 @@ using System;
 using System.Threading.Tasks;
 using Berger.Application.Interfaces;
 using Berger.Application.Models.Church;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Berger.Web.Controllers
 {
-    [Route("church")]
+    [Authorize]
+    [Route("churchs")]
     [ApiController]
-    public class ChurchController : ControllerBase
+    public class ChurchController : AbstractController
     {
         private readonly IChurchService _churchService;
 
@@ -18,16 +20,17 @@ namespace Berger.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateChurch(ChurchRequestModel churchRequestModel)
+        public async Task<IActionResult> CreateChurch([FromBody] ChurchRequestModel churchRequestModel)
         {
             try
             {
-                await _churchService.CreateChurch(churchRequestModel);
+                var userId = GetUserIdFromToken();
+                await _churchService.CreateChurch(churchRequestModel, userId);
                 return Ok();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return HandleErrors(ex);
             }
         }
 
@@ -36,12 +39,13 @@ namespace Berger.Web.Controllers
         {
             try
             {
-                var churchs = await _churchService.GetAllChurchs();
+                var userId = GetUserIdFromToken();
+                var churchs = await _churchService.GetAllChurchs(userId);
                 return Ok(churchs);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return HandleErrors(ex);
             }
         }
     }

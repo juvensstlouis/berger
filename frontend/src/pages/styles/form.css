@@ -1,0 +1,64 @@
+.ant-form {
+  width: 30%;
+  padding: 30px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.ant-form .ant-form-item:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.ant-form .ant-form-item .ant-form-item-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-form .ant-form-item label {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.ant-form .ant-form-item label, .ant-form .ant-form-item .ant-input {
+  font-size: 16px;
+}
+
+.ant-form .ant-form-item .ant-input {
+  height: 32px;
+  padding: 0 20px;
+}
+
+.ant-form .ant-form-item .ant-btn {
+  font-size: 18px;
+  color: #fff;
+  background: #02325e;
+  height: 56px;
+  border: 0;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.ant-form .ant-form-item .ant-btn:hover {
+  color: #999;
+}
+
+.ant-form .ant-form-item .ant-divider {
+  background-color: #cdcdcd;
+}
+
+.ant-form .ant-form-item .other-action {
+  display: flex;
+  justify-content: center;
+}
+
+.ant-form .ant-form-item .other-action a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #999;
+}
+
+.ant-form .ant-form-item .other-action a:hover {
+  color: #02325e;
+}

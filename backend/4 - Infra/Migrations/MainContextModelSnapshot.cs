@@ -32,11 +32,57 @@ namespace Berger.Infra.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Church", (string)null);
+                });
+
+            modelBuilder.Entity("Berger.Domain.Entities.Person", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ChurchId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChurchId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Person", (string)null);
                 });
 
             modelBuilder.Entity("Berger.Domain.Entities.User", b =>
@@ -67,41 +113,44 @@ namespace Berger.Infra.Migrations
 
             modelBuilder.Entity("Berger.Domain.Entities.Church", b =>
                 {
-                    b.OwnsOne("Berger.Domain.ComplexTypes.Address", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("ChurchId")
-                                .HasColumnType("uuid");
+                    b.HasOne("Berger.Domain.Entities.User", "UserLoggedIn")
+                        .WithMany("Churchs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("City")
-                                .HasColumnType("text");
+                    b.Navigation("UserLoggedIn");
+                });
 
-                            b1.Property<string>("Complement")
-                                .HasColumnType("text");
+            modelBuilder.Entity("Berger.Domain.Entities.Person", b =>
+                {
+                    b.HasOne("Berger.Domain.Entities.Church", "Church")
+                        .WithMany("Members")
+                        .HasForeignKey("ChurchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("Neighborhood")
-                                .HasColumnType("text");
+                    b.HasOne("Berger.Domain.Entities.User", "UserLoggedIn")
+                        .WithMany("People")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("Number")
-                                .HasColumnType("text");
+                    b.Navigation("Church");
 
-                            b1.Property<string>("State")
-                                .HasColumnType("text");
+                    b.Navigation("UserLoggedIn");
+                });
 
-                            b1.Property<string>("Street")
-                                .HasColumnType("text");
+            modelBuilder.Entity("Berger.Domain.Entities.Church", b =>
+                {
+                    b.Navigation("Members");
+                });
 
-                            b1.Property<string>("ZipCode")
-                                .HasColumnType("text");
+            modelBuilder.Entity("Berger.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Churchs");
 
-                            b1.HasKey("ChurchId");
-
-                            b1.ToTable("Church");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ChurchId");
-                        });
-
-                    b.Navigation("Address");
+                    b.Navigation("People");
                 });
 #pragma warning restore 612, 618
         }

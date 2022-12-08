@@ -1,12 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="..\3 - Domain\Berger.Domain.csproj" />
     <ProjectReference Include="..\4 - Infra\Berger.Infra.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
 </Project>

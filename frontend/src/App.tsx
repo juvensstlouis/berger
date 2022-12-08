@@ -1,11 +1,11 @@
-import PageHeader from "./components/PageHeader";
+import Layout from "./layouts/Layout";
 import Routes from "./routes";
-import "./styles/global";
+import "./styles/global.css";
 
 export default function App() {
   return (
-    <PageHeader>
+    <Layout>
       <Routes />
-    </PageHeader>
+    </Layout>
   );
 }

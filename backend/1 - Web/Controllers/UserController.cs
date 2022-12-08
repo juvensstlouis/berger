@@ -1,15 +1,14 @@
 ﻿using Berger.Application.Interfaces;
 using Berger.Application.Models.User;
-using Berger.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace Berger.Web.Controllers
 {
-    [Route("user")]
+    [Route("users")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : AbstractController
     {
         private readonly IUserService _userService;
 
@@ -26,13 +25,9 @@ namespace Berger.Web.Controllers
                 await _userService.Create(request);
                 return Ok();
             }
-            catch (BadRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return HandleErrors(ex);
             }
         }
 
@@ -45,13 +40,9 @@ namespace Berger.Web.Controllers
                 var response = await _userService.Authenticate(request);
                 return Ok(response);
             }
-            catch(NotFoundException nfex)
-            {
-                return NotFound(nfex.Message);
-            }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return HandleErrors(ex);
             }
         }
     }
